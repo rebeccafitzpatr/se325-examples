@@ -12,18 +12,18 @@ public class Client {
     public static void main(String[] args) {
         try {
 
-            InetAddress serverAddress = InetAddress.getByName(Keyboard.prompt("Server address:"));
+            InetAddress serverAddress = InetAddress.getByName(Keyboard.prompt("Server address:")); //get the server address and the port number of the server we are connecting to.
             int serverPort = Integer.parseInt(Keyboard.prompt("Server port:"));
-            String empName = Keyboard.prompt(("Enter employee name to find:"));
+            String empName = Keyboard.prompt(("Enter employee name to find:")); //what employee are we trying to find???
 
             try (Socket socket = new Socket(serverAddress, serverPort)) {
 
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); //create the output stream to send objects to the server.
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream()); //create input stream to receive objects from the server.
 
-                out.writeObject(new EmployeeRequest(empName));
+                out.writeObject(new EmployeeRequest(empName)); //write an object to our server: employee request is the name of the employee we are trying to find.
 
-                boolean found = in.readBoolean();
+                boolean found = in.readBoolean();  //read back from the server a result which is a boolean value.
 
                 if (found) {
                     Employee emp = (Employee) in.readObject();
