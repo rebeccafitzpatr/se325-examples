@@ -18,9 +18,13 @@ public class Client {
 
             try (Socket socket = new Socket(serverAddress, serverPort)) {
 
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); //create the output stream to send objects to the server.
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream()); //create input stream to receive objects from the server.
-
+                ObjectOutputStream out =
+                        new ObjectOutputStream(socket.getOutputStream());
+                //create the output stream to send objects to the server.
+                // rather than the data output stream.
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream()); //create input stream to receive objects from the server
+                //object output and input streams also have methods to
+                // read/write primitive types as well as objects.
                 out.writeObject(new EmployeeRequest(empName)); //write an object to our server: employee request is the name of the employee we are trying to find.
 
                 boolean found = in.readBoolean();  //read back from the server a result which is a boolean value.

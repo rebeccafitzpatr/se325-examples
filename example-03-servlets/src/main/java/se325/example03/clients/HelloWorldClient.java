@@ -8,7 +8,7 @@ public class HelloWorldClient {
 
     public static void main(String[] args) {
         Client httpClient = ClientBuilder.newClient();
-        Response response = httpClient.target("http://localhost:8080/example_03_servlets_war_exploded/hello").request().get();
+        Response response = httpClient.target("http://localhost:8080/hello").request().get();
         String message = response.readEntity(String.class);
         System.out.println("Status: " + response.getStatus());
         System.out.println("Message: " + message);

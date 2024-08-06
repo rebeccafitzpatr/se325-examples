@@ -15,13 +15,14 @@ import java.util.Optional;
 public class Server {
 
     public static void main(String[] args) {
-
+        //simple object graph
         Manager mgr = new Manager("David", "8653899");
         Employee e1 = new Employee("Tim", "2368571", mgr);
         Employee e2 = new Employee("Gareth", "0911558", mgr);//creating the object graph.
         List<Employee> employees = Arrays.asList(mgr, e1, e2); //this is the list of employess we are searching through
 
-        try (ServerSocket socket = new ServerSocket(0)) {
+        try (ServerSocket socket = new ServerSocket(0)) { //creating server
+            // socket, similar to example 1.
 
             InetAddress serverHost = InetAddress.getLocalHost();
             System.out.println("Server destination: " + serverHost.getHostAddress() + ":" + socket.getLocalPort());
