@@ -62,7 +62,7 @@ public class ParoleeResource {
      * object when preparing the HTTP response message.
      */
     @POST
-    @Consumes(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT)
+    @Consumes(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT) //when we get a request, that request might contain data which is a seriliased java object, then we find the method that can consume such data, jaxrs uses the serialisationreaderwriter to deserialse the information and pass it to the create parolee method.
     public Response createParolee(Parolee parolee) {
 
         // Generate an ID for the new Parolee, and store it in memory.

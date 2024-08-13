@@ -14,12 +14,12 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
-@Produces(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT)
-@Consumes(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT)
+@Produces(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT) //give it a produces annotation to let jaxrs know that we can use this class to serialise java object into serialised java object
+@Consumes(SerializationMessageBodyReaderAndWriter.APPLICATION_JAVA_SERIALIZED_OBJECT) //consumes lets us know that htis class can deserialise
 public class SerializationMessageBodyReaderAndWriter implements
         MessageBodyReader<Serializable>, MessageBodyWriter<Serializable> {
 
-    public static final String APPLICATION_JAVA_SERIALIZED_OBJECT = "application/java-serialization";
+    public static final String APPLICATION_JAVA_SERIALIZED_OBJECT = "application/java-serialization";//we want to support java serialised classes as a data interchange format
     public static final MediaType APPLICATION_JAVA_SERIALIZED_OBJECT_TYPE = MediaType
             .valueOf(APPLICATION_JAVA_SERIALIZED_OBJECT);
 

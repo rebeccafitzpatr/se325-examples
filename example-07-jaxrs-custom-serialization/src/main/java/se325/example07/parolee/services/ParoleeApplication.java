@@ -22,7 +22,7 @@ public class ParoleeApplication extends Application {
 
     public ParoleeApplication() {
         singletons.add(new ParoleeResource());
-        classes.add(SerializationMessageBodyReaderAndWriter.class);
+        classes.add(SerializationMessageBodyReaderAndWriter.class); //add our class to the list of classes that is obtained by get classes method. This lets JAXRS know that our reader write class actually exists.
     }
 
     @Override
