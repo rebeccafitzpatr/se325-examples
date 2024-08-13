@@ -46,7 +46,7 @@ public class ParoleeResourceIT {
     @BeforeClass
     public static void createClient() {
         // Use ClientBuilder to create a new client that can be used to create connections to the Web service.
-        client = ClientBuilder.newClient();
+        client = ClientBuilder.newClient(); //creating client before the unit tests.
     }
 
     @AfterClass
@@ -78,7 +78,8 @@ public class ParoleeResourceIT {
         String jsonPayload = "{ \"firstName\": \"Jesse\", \"lastName\": \"James\", \"gender\": \"MALE\", \"dateOfBirth\": \"1847-09-05\" }";
 
         // Make a HTTP POST request to create a new Parolee.
-        try (Response response = client.target(WEB_SERVICE_URI).request().post(Entity.json(jsonPayload))) {
+        try (Response response = client.target(WEB_SERVICE_URI).request().post(Entity.json(jsonPayload))) { //client.target creates that web target that we can user, then we send a request to that, giving us our sync invoker object, then we send a post request to the web target, and the post request is going to contain the json payload in the method body, formatted as application/json
+            //if we have a class like response that implements autoclosable interface, that when we put it inside the try with resources, we never need to explicitly close it. once the try block exits, it is guaranteed to close properly on its own!
 
             // Check that the HTTP response code is 201 Created.
             int responseCode = response.getStatus();

@@ -64,7 +64,10 @@ public class ParoleeResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public StreamingOutput getParolee(@PathParam("id") long id) {
+    public StreamingOutput getParolee(@PathParam("id") long id) { //we are trying to get a parolee with a aparticular ID, so we use pathparam.
+        //when they send a request to /parolees/value, then the value will be assigned identifier 'id' and we will try convert that value to a long and supply it as parolee id.
+
+        // returning streaming output is essentially an interfae that lets us write information to an output stream to send back. in the next video series we will see how we can return an actual parolee object instead.
         _logger.info("Retrieving parolee with id: " + id);
         // Lookup the Parolee within the in-memory data structure.
         final Parolee parolee = _paroleeDB.get(id);
@@ -72,6 +75,8 @@ public class ParoleeResource {
             // Return a HTTP 404 response if the specified Parolee isn't found.
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+
+        //if id is null, we throw a web application exception with NOT_FOUND. JAXRS will get the exception and convert it into a not found response and send it back to the client
 
         // Return a StreamingOuput instance that the JAX-RS implementation will use to set the body of the
         // HTTP response message.
@@ -100,7 +105,7 @@ public class ParoleeResource {
         _logger.debug("Created parolee with id: " + parolee.getId());
 
         return Response.created(URI.create("/parolees/" + parolee.getId()))
-                .build();
+                .build(); //response.created starts by calling the 'created' http response code, then we suplly a uri where that resource that was just created can be accessed from, that helps build our response up so we can build and return that.
     }
 
     /**
@@ -113,7 +118,7 @@ public class ParoleeResource {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateParolee(@PathParam("id") long id, InputStream is) {
+    public void updateParolee(@PathParam("id") long id, InputStream is) {  //this method is not using response. Becaus it is returning void, so if this method returns successfully it doesn't return anything, so jaxrs will automatically send a 204 no content.
         Parolee update = readParolee(is);
         Parolee current = _paroleeDB.get(id);
         if (current == null) {
