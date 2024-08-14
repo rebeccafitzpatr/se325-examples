@@ -10,17 +10,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity //etity is an object that has its own lifecycle and needs to be persisted in the database. MArk the entity class with the JPA annotation
 public class Message {
 
-    @Id
-    @GeneratedValue
+    @Id //mark the primary key value
+    @GeneratedValue //if we do not supply a value for id, leave it null, then when we first  persist it to a database, JPA will fill it for us and make sure that it is unique.
     private Long id;
 
-    private String content;
+    //because we put the annotation in the fields, so this is field access
+
+    private String content; //these are standard fields.
     private LocalDateTime creationTime;
 
-    @ElementCollection
+    @ElementCollection //This means that the comments list is tied completely to this one message. Different messages cannot share a same comment. This is an embeddable class - Comment must be tied to an entity class.
     private List<Comment> comments = new ArrayList<>();
 
     public Message() {
