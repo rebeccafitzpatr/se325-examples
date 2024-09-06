@@ -33,7 +33,7 @@ public class ClientMain {
     /**
      * Subscribes to be notified when a message is received from any user in the chat.
      */
-    private void subscribe() {
+    private void subscribe() { //this is wehre we send a get request using async method, meaning that we can supply a callback.
         subClient.target(WEB_SERVICE_URI + "/sub").request()
                 .accept(MediaType.APPLICATION_JSON)
                 .async().get(callback);
@@ -42,7 +42,7 @@ public class ClientMain {
     /**
      * The callback to be notified when a chat message is received, or when an error occurs while waiting for a message
      */
-    private final InvocationCallback<Message> callback = new InvocationCallback<>() {
+    private final InvocationCallback<Message> callback = new InvocationCallback<>() {// callback is defined here, has two methods, completed and failed.
 
         /**
          * Called when a new chat message is received. Displays the received message, then calls subscribe() again,
